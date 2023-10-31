@@ -1,7 +1,14 @@
 const container = document.createElement('div');
+const bookDialog = document.getElementById('book-dialog');
+const openDialog = document.getElementById('open-dialog');
+const dialogContainer = document.getElementById('dialog-container');
 container.classList.add('container');
 document.body.appendChild(container);
 const myLibrary = [];
+
+openDialog.addEventListener('click', () => {
+    bookDialog.showModal();
+});
 
 function Book(title, author, pages, hasRead) {
     this.title = title
@@ -43,6 +50,7 @@ function displayBooks() {
         bookContainer.appendChild(book);
         bookContainer.appendChild(bookIcons);
         container.appendChild(bookContainer);
+        container.appendChild(dialogContainer);
     });
 }
 
