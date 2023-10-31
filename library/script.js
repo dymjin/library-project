@@ -18,15 +18,23 @@ function addBookToLibrary(title, author, pages, hasRead) {
 }
 
 function displayBooks() {
-    myLibrary.forEach((items) => {
-        let itemContainer = document.createElement('div');
-        let item = document.createElement('div');
-        let title = document.createElement('div');
-        let author = document.createElement('div');
-        item.textContent = `${items.info()}`;
-        itemContainer.appendChild(item);
-        itemContainer.classList.add('item-container');
-        container.appendChild(itemContainer);
+    myLibrary.forEach((books) => {
+        let bookContainer = document.createElement('div');
+        let book = document.createElement('div');
+        let bookIcons = document.createElement('div');
+        let favoriteIcon = document.createElement('span');
+        let pagesIcon = document.createElement('div');
+        favoriteIcon.classList.add("material-symbols-outlined");
+        favoriteIcon.textContent = "star";
+        pagesIcon.innerHTML = `<span class="material-symbols-outlined">auto_stories</span>${books.pages}`;
+        book.innerHTML = `<div class="title">${books.title}</div><br>by ${books.author}`;
+        bookContainer.classList.add('book-container');
+        bookIcons.classList.add('book-icons');
+        bookIcons.appendChild(favoriteIcon);
+        bookIcons.appendChild(pagesIcon);
+        bookContainer.appendChild(book);
+        bookContainer.appendChild(bookIcons);
+        container.appendChild(bookContainer);
     });
 }
 

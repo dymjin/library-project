@@ -6,17 +6,36 @@ body,
     padding: 0;
 }
 
+span.material-symbols-outlined {
+    font-size: 2rem;
+}
+
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-template-rows: 200px;
+    grid-auto-rows: 200px;
+    gap: 2rem;
+    padding: 2rem;
 }
 
-.item-container {
+.book-container {
+    border-radius: 2rem;
     background-color: #d42121;
     display: grid;
 }
 
-.item-container>div {
+.book-container>div {
     place-self: center;
+}
+
+.book-icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.book-icons>div {
+    display: flex;
+    align-items: center;
 }
