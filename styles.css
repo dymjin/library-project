@@ -29,7 +29,7 @@ span.material-symbols-outlined {
     place-self: center;
 }
 
-.book {
+.book-text {
     display: flex;
     flex-direction: column;
     align-items: center;
