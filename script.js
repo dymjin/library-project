@@ -26,7 +26,7 @@ confirmBtn.addEventListener('click', (event) => {
     } else {
         console.log(`pagecount: ${pageCount.value}\nauthor: ${bookAuthor.value} \ntitle: ${bookTitle.value}`);
         event.preventDefault();
-        addBookToLibrary(bookTitle.value, bookAuthor.value, pageCount.value, true);
+        addBookToLibrary(bookTitle.value, bookAuthor.value, pageCount.value, hasRead.checked);
         bookDialog.close();
 
         pageCount.value = '';
@@ -67,6 +67,7 @@ function addBookToLibrary(title, author, pages, hasRead) {
     let pagesContainer = document.createElement('div');
     let pagesIcon = document.createElement('span');
     let removeIcon = document.createElement('span');
+    let readStatus = document.createElement('span')
 
     bookTitle.textContent = `${book.title}`;
     bookAuthor.textContent = `${book.author}`;
@@ -74,14 +75,15 @@ function addBookToLibrary(title, author, pages, hasRead) {
     pagesIcon.textContent = 'auto_stories';
     pagesContainer.textContent = `${book.pages}`;
     removeIcon.textContent = "close";
+    readStatus.textContent = "book_2"
 
     bookContainer.classList.add('book-container');
     bookTitle.classList.add('book-title');
     bookAuthor.classList.add('book-author');
     bookText.classList.add('book-text');
 
+    readStatus.classList.add('material-symbols-outlined')
     removeIcon.classList.add("material-symbols-outlined");
-    removeIcon.classList.add("remove");
     bookIcons.classList.add('book-icons');
     favoriteIcon.classList.add("material-symbols-outlined");
     pagesIcon.classList.add('material-symbols-outlined');
@@ -93,12 +95,23 @@ function addBookToLibrary(title, author, pages, hasRead) {
     bookIcons.appendChild(pagesContainer);
     bookIcons.appendChild(favoriteIcon);
     bookIcons.appendChild(removeIcon);
+    bookIcons.appendChild(readStatus);
 
     bookContainer.appendChild(bookText);
     bookContainer.appendChild(bookIcons);
     bookContainer.setAttribute("data", `${myLibrary.indexOf(book)}`);
 
     container.insertBefore(bookContainer, dialogContainer);
+
+    readStatus.addEventListener('click', () => {
+        if (book.read) {
+            readStatus.textContent = "book_3";
+            book.read = false;
+        } else {
+            readStatus.textContent = "book_2";
+            book.read = true;
+        }
+    })
 
     removeIcon.addEventListener("click", () => {
         myLibrary.splice(bookContainer.getAttribute('data'), 1);
