@@ -8,6 +8,7 @@ const bookAuthor = document.getElementById('bauthor');
 const pageCount = document.getElementById('bpages');
 const cancelBtn = document.querySelector('button[value="cancel"]');
 const confirmBtn = document.getElementById('confirm-btn');
+const hasRead = document.getElementById('readBool');
 
 container.classList.add('container');
 document.body.appendChild(container);
@@ -26,8 +27,8 @@ confirmBtn.addEventListener('click', (event) => {
         console.log(`pagecount: ${pageCount.value}\nauthor: ${bookAuthor.value} \ntitle: ${bookTitle.value}`);
         event.preventDefault();
         addBookToLibrary(bookTitle.value, bookAuthor.value, pageCount.value, true);
-        console.log(document.querySelector('.book-container'));
         bookDialog.close();
+
         pageCount.value = '';
         bookAuthor.value = '';
         bookTitle.value = '';
@@ -38,6 +39,9 @@ cancelBtn.addEventListener('click', () => {
     pageCount.value = '';
     bookAuthor.value = '';
     bookTitle.value = '';
+    console.log(hasRead.checked);
+
+
 });
 
 function Book(title, author, pages, hasRead) {
@@ -53,33 +57,51 @@ function Book(title, author, pages, hasRead) {
 function addBookToLibrary(title, author, pages, hasRead) {
     let book = new Book(title, author, pages, hasRead);
     myLibrary.push(book);
+
     let bookContainer = document.createElement('div');
     let bookText = document.createElement('div');
     let bookTitle = document.createElement('div');
     let bookAuthor = document.createElement('div');
     let bookIcons = document.createElement('div');
     let favoriteIcon = document.createElement('span');
-    let pagesIcon = document.createElement('div');
+    let pagesContainer = document.createElement('div');
+    let pagesIcon = document.createElement('span');
+    let removeIcon = document.createElement('span');
 
     bookTitle.textContent = `${book.title}`;
     bookAuthor.textContent = `${book.author}`;
     favoriteIcon.textContent = "star";
+    pagesIcon.textContent = 'auto_stories';
+    pagesContainer.textContent = `${book.pages}`;
+    removeIcon.textContent = "close";
 
     bookContainer.classList.add('book-container');
     bookTitle.classList.add('book-title');
     bookAuthor.classList.add('book-author');
     bookText.classList.add('book-text');
 
+    removeIcon.classList.add("material-symbols-outlined");
+    removeIcon.classList.add("remove");
     bookIcons.classList.add('book-icons');
     favoriteIcon.classList.add("material-symbols-outlined");
-    pagesIcon.innerHTML = `<span class="material-symbols-outlined">auto_stories</span>${book.pages}`;
+    pagesIcon.classList.add('material-symbols-outlined');
 
     bookText.appendChild(bookTitle);
     bookText.appendChild(bookAuthor);
+
+    pagesContainer.appendChild(pagesIcon);
+    bookIcons.appendChild(pagesContainer);
     bookIcons.appendChild(favoriteIcon);
-    bookIcons.appendChild(pagesIcon);
+    bookIcons.appendChild(removeIcon);
+
     bookContainer.appendChild(bookText);
     bookContainer.appendChild(bookIcons);
-    container.insertBefore(bookContainer, dialogContainer);
-}
+    bookContainer.setAttribute("data", `${myLibrary.indexOf(book)}`);
 
+    container.insertBefore(bookContainer, dialogContainer);
+
+    removeIcon.addEventListener("click", () => {
+        myLibrary.splice(bookContainer.getAttribute('data'), 1);
+        container.removeChild(bookContainer);
+    });
+}
