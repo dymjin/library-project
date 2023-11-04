@@ -42,6 +42,7 @@ cancelBtn.addEventListener('click', () => {
     bookAuthor.value = '';
     bookTitle.value = '';
     hasRead.checked = true;
+    bookDialog.close();
 });
 
 function Book(title, author, pages, hasRead) {

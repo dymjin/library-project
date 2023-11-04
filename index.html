@@ -9,7 +9,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -17,25 +21,22 @@
         <dialog id="bdialog">
             <form>
                 <p>
-                    <label for="btitle">Title:</label>
+                    <label for="btitle">Title</label>
                     <input id="btitle" type="text">
                 </p>
                 <p>
-                    <label for="bauthor">Author:</label>
+                    <label for="bauthor">Author</label>
                     <input id="bauthor" type="text">
                 </p>
                 <p>
-                    <label for="bpages"># of Pages:</label>
+                    <label for="bpages">Number of Pages</label>
                     <input id="bpages" type="number" min="5" max="9999">
                 </p>
-                <fieldset>
-                    <legend>read:</legend>
-                    <div>
-                        <label for="readBool">yes</label>
-                        <input name="option" type="checkbox" id="readBool" checked>
-                    </div>
-                </fieldset>
-                <div>
+                <div class="read-container">
+                    <label for="readBool">Read</label>
+                    <input name="option" type="checkbox" id="readBool" checked>
+                </div>
+                <div class="btn-container">
                     <button value="cancel" formmethod="dialog">Cancel</button>
                     <button value="default" id="confirm-btn">Confirm</button>
                 </div>
