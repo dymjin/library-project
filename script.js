@@ -27,11 +27,13 @@ confirmBtn.addEventListener('click', (event) => {
         console.log(`pagecount: ${pageCount.value}\nauthor: ${bookAuthor.value} \ntitle: ${bookTitle.value}`);
         event.preventDefault();
         addBookToLibrary(bookTitle.value, bookAuthor.value, pageCount.value, hasRead.checked);
+        console.log(hasRead.checked);
         bookDialog.close();
 
         pageCount.value = '';
         bookAuthor.value = '';
         bookTitle.value = '';
+        hasRead.checked = true;
     }
 })
 
@@ -39,9 +41,7 @@ cancelBtn.addEventListener('click', () => {
     pageCount.value = '';
     bookAuthor.value = '';
     bookTitle.value = '';
-    console.log(hasRead.checked);
-
-
+    hasRead.checked = true;
 });
 
 function Book(title, author, pages, hasRead) {
@@ -102,6 +102,9 @@ function addBookToLibrary(title, author, pages, hasRead) {
     bookContainer.setAttribute("data", `${myLibrary.indexOf(book)}`);
 
     container.insertBefore(bookContainer, dialogContainer);
+
+    if (book.read) readStatus.textContent = "book_2";
+    else readStatus.textContent = "book_3";
 
     readStatus.addEventListener('click', () => {
         if (book.read) {
