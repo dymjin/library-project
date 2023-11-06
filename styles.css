@@ -7,6 +7,10 @@ body,
     font-family: 'Poppins', sans-serif;
 }
 
+html {
+    background-color: rgb(207, 207, 207);
+}
+
 :root {
     --main-color-theme: rgb(20, 116, 194);
 }
@@ -17,21 +21,28 @@ span.material-symbols-outlined {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-template-rows: 200px;
-    grid-auto-rows: 200px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: 400px;
+    grid-auto-rows: 400px;
     gap: 2rem;
     padding: 2rem;
 }
 
 .book-container {
-    border-radius: 2rem;
-    background-color: var(--main-color-theme);
+    border-radius: 1rem;
+    background-color: white;
+    border-left: 1rem solid var(--main-color-theme);
     display: grid;
+    grid-template-rows: max-content max-content;
+    box-shadow: 3px 3px 5px rgb(114, 114, 114);
+    justify-content: center;
+    align-content: space-between;
+    padding: 1rem;
 }
 
-.book-container>div {
-    place-self: center;
+.book-container:hover {
+    box-shadow: 4px 4px 7px rgb(141, 141, 141);
+    translate: 0 -3px;
 }
 
 .book-text {
@@ -42,6 +53,7 @@ span.material-symbols-outlined {
 
 .book-title {
     font-size: 2.5rem;
+    font-weight: 500;
 }
 
 .book-author {
@@ -57,6 +69,18 @@ span.material-symbols-outlined {
 .book-icons>div {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+.book-icons>span:hover {
+    cursor: grab;
+    content: "hello";
+}
+
+.book-icons>span:nth-child(2) {
+    position: relative;
+    top: -2px;
 }
 
 #dialog-container {
@@ -65,12 +89,24 @@ span.material-symbols-outlined {
 }
 
 #open-dialog {
+    justify-self: center;
     background-color: var(--main-color-theme);
     border: none;
-    border-radius: 2rem;
+    border-radius: 4rem;
+    color: white;
     width: 120px;
     height: 120px;
-    padding: 2.5rem;
+    font-size: 4rem;
+}
+
+#open-dialog:hover {
+    background-color: color-mix(in srgb, var(--main-color-theme), #000 15%);
+}
+
+#open-dialog:focus {
+    outline: none;
+    border: none;
+    border: 3px solid black;
 }
 
 #bdialog {
@@ -94,6 +130,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
 }
 
 form>p {
@@ -105,30 +143,27 @@ form>p {
     align-self: center;
 }
 
-#readBool {
-    vertical-align: -1px;
-}
-
 .btn-container {
     display: flex;
     gap: 1rem;
     align-self: flex-end;
+    font-size: 1.3rem;
 }
 
 p>input {
     border: none;
-    border: 1px solid black;
-    border-radius: 2px;
+    border: 2px solid rgb(68, 68, 68);
+    border-radius: 3px;
     padding: 2px 0.5rem;
 }
 
 p>input:focus {
     outline: none;
-    outline: 2px solid var(--main-color-theme);
+    outline: 3px solid var(--main-color-theme);
 }
 
 p>input:hover {
-    box-shadow: 2px 2px 3px rgb(90, 90, 90);
+    box-shadow: 2px 2px 3px rgb(143, 143, 143);
 }
 
 .btn-container>button {

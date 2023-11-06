@@ -21,15 +21,12 @@ openDialog.addEventListener('click', () => {
 });
 
 confirmBtn.addEventListener('click', (event) => {
-    if (pageCount.value === '' || bookAuthor.value === '' || bookTitle.value === '') {
+    event.preventDefault();
+    if (pageCount.value === '' || bookAuthor.value === '' || bookTitle.value === '' || pageCount.value > 5000 || pageCount.value < 0) {
         event.preventDefault();
-    } else {
-        console.log(`pagecount: ${pageCount.value}\nauthor: ${bookAuthor.value} \ntitle: ${bookTitle.value}`);
-        event.preventDefault();
+    } else if (pageCount.value > 0) {
         addBookToLibrary(bookTitle.value, bookAuthor.value, pageCount.value, hasRead.checked);
-        console.log(hasRead.checked);
         bookDialog.close();
-
         pageCount.value = '';
         bookAuthor.value = '';
         bookTitle.value = '';
@@ -70,13 +67,17 @@ function addBookToLibrary(title, author, pages, hasRead) {
     let removeIcon = document.createElement('span');
     let readStatus = document.createElement('span')
 
+    pagesIcon.setAttribute("title", "Pages");
+    favoriteIcon.setAttribute("title", "Add to favorites");
+    removeIcon.setAttribute("title", "Remove book from library");
+    readStatus.setAttribute("title", "Toggle read status");
+
     bookTitle.textContent = `${book.title}`;
     bookAuthor.textContent = `${book.author}`;
     favoriteIcon.textContent = "star";
     pagesIcon.textContent = 'auto_stories';
     pagesContainer.textContent = `${book.pages}`;
     removeIcon.textContent = "close";
-    readStatus.textContent = "book_2"
 
     bookContainer.classList.add('book-container');
     bookTitle.classList.add('book-title');
@@ -104,15 +105,15 @@ function addBookToLibrary(title, author, pages, hasRead) {
 
     container.insertBefore(bookContainer, dialogContainer);
 
-    if (book.read) readStatus.textContent = "book_2";
-    else readStatus.textContent = "book_3";
+    if (book.read) readStatus.textContent = "preview";
+    else readStatus.textContent = "preview_off";
 
     readStatus.addEventListener('click', () => {
         if (book.read) {
-            readStatus.textContent = "book_3";
+            readStatus.textContent = "preview_off";
             book.read = false;
         } else {
-            readStatus.textContent = "book_2";
+            readStatus.textContent = "preview";
             book.read = true;
         }
     })
